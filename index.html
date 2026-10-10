@@ -1,0 +1,1463 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070816">
+
+    <title>Sanjay R. | Beyond Ordinary</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================
+           GLOBAL DESIGN
+        ========================= */
+
+        :root {
+            --bg: #070816;
+            --card: #101329;
+            --blue: #7188ff;
+            --cyan: #60f0df;
+            --purple: #a78bfa;
+            --text: #f5f6ff;
+            --muted: #9ba3c2;
+            --border: rgba(255,255,255,0.10);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 80% 10%,
+                rgba(91, 100, 255, 0.18), transparent 40%),
+                radial-gradient(ellipse at 10% 60%,
+                rgba(30, 210, 200, 0.08), transparent 35%);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
+
+        .section {
+            padding: 110px 0;
+        }
+
+        .section-label {
+            color: var(--cyan);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -2px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            max-width: 520px;
+            margin-top: 18px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                100deg,
+                #ffffff,
+                #8ea0ff 50%,
+                #60f0df
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(7, 8, 22, 0.78);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        nav.scrolled {
+            border-color: var(--border);
+        }
+
+        .nav-inner {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #b7bed7;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .nav-button {
+            padding: 10px 17px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: white;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .nav-button:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .menu-button {
+            display: none;
+            padding: 8px 12px;
+            background: transparent;
+            color: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            padding: 140px 0 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .availability {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.03);
+            padding: 9px 14px;
+            border-radius: 30px;
+            color: #c5cce1;
+            font-size: 12px;
+            margin-bottom: 28px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--cyan);
+            animation: pulse 2s infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 86px);
+            line-height: 1.02;
+            letter-spacing: -6px;
+            font-weight: 900;
+        }
+
+        .hero h1 .line {
+            display: block;
+        }
+
+        .hero-description {
+            color: var(--muted);
+            max-width: 570px;
+            margin: 27px 0;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 21px;
+            border-radius: 11px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .button-primary {
+            background: linear-gradient(110deg, var(--blue), var(--cyan));
+            color: #080b18;
+            border: none;
+        }
+
+        .button-secondary {
+            border: 1px solid var(--border);
+            color: white;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(100,120,255,0.18);
+        }
+
+        .hero-note {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #747e9e;
+            margin-top: 30px;
+        }
+
+        /* =========================
+           ANIMATED HERO GRAPHIC
+        ========================= */
+
+        .hero-visual {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 440px;
+        }
+
+        .orbit {
+            width: 340px;
+            max-width: 85vw;
+            aspect-ratio: 1;
+            border: 1px solid rgba(113,136,255,0.35);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            position: relative;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .orbit::before,
+        .orbit::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(96,240,223,0.19);
+        }
+
+        .orbit::before {
+            inset: 27px;
+        }
+
+        .orbit::after {
+            inset: 60px;
+            border-style: dashed;
+            animation: rotate 40s linear infinite;
+        }
+
+        .core {
+            width: 190px;
+            height: 190px;
+            border: 1px solid rgba(160,180,255,0.45);
+            border-radius: 42px;
+            background: linear-gradient(
+                145deg,
+                rgba(113,136,255,0.24),
+                rgba(96,240,223,0.07)
+            );
+            box-shadow:
+                0 0 70px rgba(113,136,255,0.20),
+                inset 0 0 45px rgba(96,240,223,0.08);
+            display: grid;
+            place-items: center;
+            transform: rotate(-8deg);
+        }
+
+        .core-content {
+            text-align: center;
+            transform: rotate(8deg);
+        }
+
+        .monogram {
+            font-size: 76px;
+            font-weight: 900;
+            letter-spacing: -9px;
+            padding-right: 9px;
+            background: linear-gradient(140deg, white, #9daeff, var(--cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .core-content small {
+            color: var(--cyan);
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .floating-card {
+            position: absolute;
+            padding: 13px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(15,19,39,0.92);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .floating-card small {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .floating-one {
+            top: 12%;
+            right: -1%;
+        }
+
+        .floating-two {
+            bottom: 15%;
+            left: -3%;
+        }
+
+        .floating-three {
+            bottom: 7%;
+            right: 1%;
+        }
+
+        /* =========================
+           ABOUT SECTION
+        ========================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-top: 45px;
+        }
+
+        .glass-card {
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: linear-gradient(
+                145deg,
+                rgba(20,25,49,0.95),
+                rgba(12,15,31,0.9)
+            );
+            transition: 0.3s;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(96,240,223,0.35);
+            transform: translateY(-4px);
+        }
+
+        .about-text {
+            color: #bdc5df;
+            line-height: 2;
+            font-size: 14px;
+        }
+
+        .about-text strong {
+            color: white;
+        }
+
+        .quote {
+            margin-top: 25px;
+            padding: 18px;
+            border-left: 2px solid var(--cyan);
+            background: rgba(96,240,223,0.04);
+            color: #dce4fa;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .traits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+        }
+
+        .trait {
+            padding: 20px 16px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.015);
+            border-radius: 13px;
+        }
+
+        .trait-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .trait h3 {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .trait p {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           INTERESTS
+        ========================= */
+
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 17px;
+            margin-top: 45px;
+        }
+
+        .interest-card {
+            padding: 27px;
+            min-height: 225px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: linear-gradient(145deg, #12172d, #0b0e1d);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interest-card::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            right: -55px;
+            top: -55px;
+            border-radius: 50%;
+            background: rgba(113,136,255,0.1);
+            filter: blur(10px);
+        }
+
+        .interest-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(113,136,255,0.5);
+        }
+
+        .interest-icon {
+            font-size: 31px;
+            margin-bottom: 22px;
+        }
+
+        .interest-card h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .interest-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        /* =========================
+           JOURNEY
+        ========================= */
+
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 45px;
+        }
+
+        .journey-card {
+            padding: 27px;
+            border-top: 2px solid var(--cyan);
+            border-radius: 0 0 16px 16px;
+            background: linear-gradient(
+                180deg,
+                rgba(96,240,223,0.06),
+                transparent
+            );
+        }
+
+        .journey-number {
+            color: var(--cyan);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            margin-bottom: 23px;
+        }
+
+        .journey-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .journey-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .skills-card {
+            margin-top: 24px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .skill {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: #d6def7;
+            padding: 10px 13px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            background: rgba(255,255,255,0.02);
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* =========================
+           VISION SECTION
+        ========================= */
+
+        .vision-box {
+            padding: 55px;
+            border: 1px solid rgba(113,136,255,0.25);
+            border-radius: 25px;
+            background:
+                radial-gradient(
+                    ellipse at 90% 10%,
+                    rgba(113,136,255,0.19),
+                    transparent 45%
+                ),
+                linear-gradient(130deg, #141a32, #0c1021);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .vision-box p {
+            max-width: 620px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 2;
+            margin-top: 18px;
+        }
+
+        .vision-symbol {
+            font-size: 45px;
+            color: var(--cyan);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 30px 0;
+            color: #7e87a5;
+            font-size: 11px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================= */
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-13px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 12px var(--cyan);
+            }
+            50% {
+                opacity: 0.5;
+                box-shadow: 0 0 3px var(--cyan);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================= */
+
+        @media (max-width: 850px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .hero-visual {
+                min-height: 390px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vision-box {
+                padding: 35px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section {
+                padding: 80px 0;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 76px;
+                left: 0;
+                right: 0;
+                padding: 25px 5%;
+                background: #0b0e20;
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-button {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 125px;
+            }
+
+            .hero h1 {
+                font-size: clamp(44px, 12vw, 65px);
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .hero-visual {
+                min-height: 330px;
+            }
+
+            .orbit {
+                width: 270px;
+            }
+
+            .core {
+                width: 155px;
+                height: 155px;
+            }
+
+            .monogram {
+                font-size: 62px;
+            }
+
+            .floating-card {
+                padding: 10px 12px;
+            }
+
+            .floating-one {
+                right: 0;
+            }
+
+            .floating-two {
+                left: 0;
+            }
+
+            .floating-card strong {
+                font-size: 11px;
+            }
+
+            .floating-card small {
+                font-size: 9px;
+            }
+
+            .interest-grid,
+            .journey-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .interest-card {
+                min-height: auto;
+            }
+
+            .glass-card {
+                padding: 22px;
+            }
+
+            .traits-grid {
+                gap: 10px;
+            }
+
+            .trait {
+                padding: 15px 12px;
+            }
+
+            .vision-box {
+                padding: 28px;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav id="navbar">
+        <div class="container nav-inner">
+
+            <a href="#home" class="logo">
+                SANJAY<span>.</span>R
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#about">About Me</a>
+                <a href="#interests">Interests</a>
+                <a href="#journey">My Journey</a>
+                <a href="#vision">My Vision</a>
+            </div>
+
+            <a href="#vision" class="nav-button">
+                Explore My Vision ↗
+            </a>
+
+            <button
+                class="menu-button"
+                id="menuButton"
+                aria-label="Open navigation menu"
+                aria-expanded="false">
+                ☰
+            </button>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero" id="home">
+
+        <div class="container hero-grid">
+
+            <div class="hero-content">
+
+                <div class="availability">
+                    <span class="status-dot"></span>
+                    CURIOUS BY NATURE. CREATIVE BY CHOICE.
+                </div>
+
+                <h1>
+                    <span class="line">I THINK.</span>
+                    <span class="line">I CREATE.</span>
+                    <span class="line gradient-text">I BUILD.</span>
+                </h1>
+
+                <p class="hero-description">
+                    I'm Sanjay R. An engineering student, aspiring writer,
+                    technology enthusiast, and visual storyteller.
+                    I enjoy exploring ideas, learning new skills, and
+                    turning imagination into something real.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#about" class="button button-primary">
+                        Discover My Character ↘
+                    </a>
+
+                    <a href="#interests" class="button button-secondary">
+                        Explore My World ↗
+                    </a>
+
+                </div>
+
+                <div class="hero-note">
+                    ENGINEERING · CREATIVITY · TECHNOLOGY · AMBITION
+                </div>
+
+            </div>
+
+
+            <!-- ABSTRACT ANIMATED DESIGN -->
+
+            <div class="hero-visual">
+
+                <div class="orbit">
+
+                    <div class="core">
+                        <div class="core-content">
+                            <div class="monogram">SR</div>
+                            <small>IN PROGRESS</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="floating-card floating-one">
+                    <strong>Always Learning</strong>
+                    <small>Curiosity never stops.</small>
+                </div>
+
+                <div class="floating-card floating-two">
+                    <strong>Logic × Imagination</strong>
+                    <small>Two sides of my mind.</small>
+                </div>
+
+                <div class="floating-card floating-three">
+                    <strong>Future Focused</strong>
+                    <small>Building what's next.</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT ME -->
+
+    <section class="section" id="about">
+
+        <div class="container">
+
+            <div class="section-label reveal">
+                01 / THE PERSON BEHIND THE IDEAS
+            </div>
+
+            <h2 class="section-title reveal">
+                More than one interest.<br>
+                <span class="gradient-text">More than one possibility.</span>
+            </h2>
+
+            <p class="section-description reveal">
+                I believe a person should never be limited to a single
+                label. My curiosity takes me from engineering and coding
+                to books, storytelling, design, and entrepreneurship.
+            </p>
+
+            <div class="about-grid">
+
+                <article class="glass-card reveal">
+
+                    <p class="about-text">
+                        I'm studying
+                        <strong>Electronics and Communication Engineering</strong>
+                        at KPR Institute of Engineering and Technology.
+                        My academic journey gives me opportunities to
+                        understand technology, solve problems, and
+                        experiment with new ideas.
+
+                        <br><br>
+
+                        Outside academics, I enjoy
+                        <strong>writing, reading, programming, video editing,
+                        motion design, and creative exploration.</strong>
+
+                        <br><br>
+
+                        I want to combine these different interests
+                        into something meaningful rather than keep them
+                        separated into boxes.
+                    </p>
+
+                    <div class="quote">
+                        "I don't need to have everything figured out.
+                        I need the curiosity to learn, the courage to try,
+                        and the discipline to keep improving."
+                    </div>
+
+                </article>
+
+
+                <article class="glass-card reveal">
+
+                    <div class="traits-grid">
+
+                        <div class="trait">
+                            <div class="trait-icon">🧠</div>
+                            <h3>Analytical</h3>
+                            <p>
+                                Breaking problems down and searching
+                                for practical solutions.
+                            </p>
+                        </div>
+
+                        <div class="trait">
+                            <div class="trait-icon">✍️</div>
+                            <h3>Imaginative</h3>
+                            <p>
+                                Turning thoughts, observations, and
+                                ideas into stories.
+                            </p>
+                        </div>
+
+                        <div class="trait">
+                            <div class="trait-icon">⚡</div>
+                            <h3>Ambitious</h3>
+                            <p>
+                                Setting meaningful goals and working
+                                towards bigger possibilities.
+                            </p>
+                        </div>
+
+                        <div class="trait">
+                            <div class="trait-icon">🛠️</div>
+                            <h3>Hands-On</h3>
+                            <p>
+                                Learning by building, testing,
+                                experimenting, and improving.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- INTERESTS -->
+
+    <section class="section" id="interests">
+
+        <div class="container">
+
+            <div class="section-label reveal">
+                02 / MY UNIVERSE
+            </div>
+
+            <h2 class="section-title reveal">
+                Different passions.<br>
+                <span class="gradient-text">One evolving mind.</span>
+            </h2>
+
+            <p class="section-description reveal">
+                Each interest teaches me something different.
+                Together, they shape the way I think, create,
+                solve problems, and see the world.
+            </p>
+
+
+            <div class="interest-grid">
+
+                <article class="interest-card reveal">
+                    <div class="interest-icon">💻</div>
+                    <h3>Programming & Technology</h3>
+                    <p>
+                        Exploring programming, web development,
+                        software, and the technology that transforms
+                        ideas into useful experiences.
+                    </p>
+                </article>
+
+
+                <article class="interest-card reveal">
+                    <div class="interest-icon">📚</div>
+                    <h3>Reading & Writing</h3>
+                    <p>
+                        A book enthusiast and aspiring author,
+                        working on creative ideas and my own book,
+                        "Statue of Spunk".
+                    </p>
+                </article>
+
+
+                <article class="interest-card reveal">
+                    <div class="interest-icon">🎬</div>
+                    <h3>Video Editing</h3>
+                    <p>
+                        Using editing, transitions, sound, and visual
+                        rhythm to turn ordinary footage into
+                        engaging stories.
+                    </p>
+                </article>
+
+
+                <article class="interest-card reveal">
+                    <div class="interest-icon">🎨</div>
+                    <h3>Motion Design</h3>
+                    <p>
+                        Exploring visual effects, animation,
+                        creative compositions, and the art of
+                        communicating through design.
+                    </p>
+                </article>
+
+
+                <article class="interest-card reveal">
+                    <div class="interest-icon">🔌</div>
+                    <h3>Electronics & Innovation</h3>
+                    <p>
+                        Experimenting with electronic components,
+                        microcontrollers, sensors, and prototypes
+                        that bring technology into the real world.
+                    </p>
+                </article>
+
+
+                <article class="interest-card reveal">
+                    <div class="interest-icon">🚀</div>
+                    <h3>Entrepreneurship</h3>
+                    <p>
+                        Dreaming of building my own agency,
+                        developing valuable skills, and turning
+                        creative ideas into useful products.
+                    </p>
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JOURNEY -->
+
+    <section class="section" id="journey">
+
+        <div class="container">
+
+            <div class="section-label reveal">
+                03 / THE JOURNEY
+            </div>
+
+            <h2 class="section-title reveal">
+                Not finished.<br>
+                <span class="gradient-text">Just getting started.</span>
+            </h2>
+
+            <p class="section-description reveal">
+                I'm building my future one skill, one experiment,
+                and one project at a time.
+            </p>
+
+
+            <div class="journey-grid">
+
+                <article class="journey-card reveal">
+                    <div class="journey-number">PHASE 01 / LEARN</div>
+
+                    <h3>Master the Foundations</h3>
+
+                    <p>
+                        Strengthen my technical knowledge,
+                        improve my creative abilities, and develop
+                        the discipline to learn independently.
+                    </p>
+                </article>
+
+
+                <article class="journey-card reveal">
+                    <div class="journey-number">PHASE 02 / CREATE</div>
+
+                    <h3>Turn Ideas Into Reality</h3>
+
+                    <p>
+                        Build applications, experiment with electronics,
+                        write stories, and create digital experiences
+                        that solve real problems.
+                    </p>
+                </article>
+
+
+                <article class="journey-card reveal">
+                    <div class="journey-number">PHASE 03 / BUILD</div>
+
+                    <h3>Create Something Bigger</h3>
+
+                    <p>
+                        Grow into a capable creator, collaborate
+                        with others, and work towards building
+                        my own creative and technology agency.
+                    </p>
+                </article>
+
+            </div>
+
+
+            <article class="glass-card skills-card reveal">
+
+                <div class="section-label">
+                    MY CURRENT TOOLKIT
+                </div>
+
+                <h3 style="font-size: 21px;">
+                    Skills I'm developing
+                </h3>
+
+                <p class="section-description" style="margin-top: 10px;">
+                    A growing collection of technical and creative
+                    abilities. This list represents my learning
+                    journey, not a claim of mastery.
+                </p>
+
+                <div class="skills">
+
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">C</span>
+                    <span class="skill">C++</span>
+                    <span class="skill">Python</span>
+                    <span class="skill">Electronics</span>
+                    <span class="skill">Arduino</span>
+                    <span class="skill">ESP32</span>
+                    <span class="skill">Premiere Pro</span>
+                    <span class="skill">After Effects</span>
+                    <span class="skill">Creative Writing</span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- VISION -->
+
+    <section class="section" id="vision">
+
+        <div class="container">
+
+            <div class="vision-box reveal">
+
+                <div>
+
+                    <div class="section-label">
+                        04 / THE BIGGER PICTURE
+                    </div>
+
+                    <h2 class="section-title">
+                        Think beyond today.<br>
+                        <span class="gradient-text">
+                            Build for tomorrow.
+                        </span>
+                    </h2>
+
+                    <p>
+                        My ambition is to become a strong writer,
+                        a skilled creator, and an entrepreneur who
+                        builds meaningful things.
+
+                        I want to bring technology, imagination,
+                        and storytelling together to create work
+                        that is useful, original, and memorable.
+
+                        I'm still discovering what I'm capable of.
+                        That's exactly what makes the journey exciting.
+                    </p>
+
+                </div>
+
+                <div class="vision-symbol">
+                    ✦
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <div>
+                <div class="footer-brand">
+                    SANJAY R.
+                </div>
+
+                <div style="margin-top: 7px;">
+                    Engineering mind. Creative soul. Future builder.
+                </div>
+            </div>
+
+            <div>
+                © <span id="year"></span> SANJAY R.
+                <br>
+                Made with curiosity and a little bit of code.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // Update the copyright year automatically.
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+        // Change navigation appearance while scrolling.
+
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", function () {
+
+            if (window.scrollY > 30) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+        });
+
+
+        // Mobile navigation menu.
+
+        const menuButton = document.getElementById("menuButton");
+        const navLinks = document.getElementById("navLinks");
+
+        menuButton.addEventListener("click", function () {
+
+            const isOpen = navLinks.classList.toggle("open");
+
+            menuButton.setAttribute("aria-expanded", isOpen);
+
+            menuButton.textContent = isOpen ? "✕" : "☰";
+
+        });
+
+
+        // Close the mobile menu after selecting a section.
+
+        document.querySelectorAll("#navLinks a").forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                navLinks.classList.remove("open");
+
+                menuButton.setAttribute("aria-expanded", "false");
+
+                menuButton.textContent = "☰";
+
+            });
+
+        });
+
+
+        // Reveal sections smoothly as they enter the screen.
+
+        const observer = new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.12
+            }
+
+        );
+
+
+        document.querySelectorAll(".reveal").forEach(function (element) {
+
+            observer.observe(element);
+
+        });
+
+    </script>
+
+</body>
+</html>
+```
